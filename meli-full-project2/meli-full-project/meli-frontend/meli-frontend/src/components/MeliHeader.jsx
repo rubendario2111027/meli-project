@@ -34,7 +34,7 @@ const MeliHeader = () => (
 
       {/* Logo Mercado Libre */}
       <a href="/" className="flex items-center flex-shrink-0 py-1">
-        <img src="/logo-ml.png" alt="Mercado Libre" className="h-7 sm:h-8 w-auto" style={{minWidth: 90}} /> {/* Adjusted size */}
+        <img src="/images/logo__small@2x.png" alt="Mercado Libre" className="h-7 sm:h-8 w-auto" style={{minWidth: 90}} />
       </a>
 
       {/* Barra de búsqueda */}
@@ -51,13 +51,6 @@ const MeliHeader = () => (
           </button>
         </div>
       </form>
-
-      {/* Promotional Image - Show on medium screens and up */}
-      <div className="hidden md:flex items-center justify-center h-10 ml-3 sm:ml-4 flex-shrink-0">
-        <a href="#">
-          <img src="https://via.placeholder.com/180x39?text=Disney%2B+Promo" alt="Promotional Image" className="h-full object-contain rounded-sm" />
-        </a>
-      </div>
 
       {/* Links de Navegación */}
       <nav className="hidden lg:flex items-center gap-3 sm:gap-4 ml-3 sm:ml-4 flex-shrink-0">

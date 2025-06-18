@@ -49,7 +49,7 @@ const ProductReviews = ({ opiniones = [], ratingStats = [0,0,0,0,0] }) => {
         {totalReviews > 0 && (
           <div className="md:w-2/3">
             {completeRatingStats.slice().reverse().map((percent, index) => {
-              const starValue = 5 - index; // 5, 4, 3, 2, 1
+              const starValue = 5 - index; 
               return (
                 <div key={starValue} className="flex items-center space-x-2 mb-1">
                   <span className="text-sm text-gray-700 w-8">{starValue}</span>

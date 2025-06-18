@@ -122,10 +122,6 @@ const ProductInfo = ({ product }) => {
           ))}
         </div>
       </div>
-
-      {/* Short Description (Optional, if needed) */}
-      {/* <p className="text-sm text-gray-600 pt-2">{productData.description}</p> */}
-
     </div>
   );
 };

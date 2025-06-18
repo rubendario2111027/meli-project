@@ -10,6 +10,7 @@ import org.springframework.http.MediaType;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -38,8 +39,16 @@ public class ProductControllerTest {
     }
 
     @Test
-    void getProductById_invalidId_returns404() throws Exception {
+    void getProductById_invalidId_returnsNotFoundWithMessage() throws Exception {
         mockMvc.perform(get("/api/products/NO_EXISTE"))
-                .andExpect(status().isNotFound());
+                .andExpect(status().isNotFound())
+                .andExpect(result -> assertTrue(result.getResolvedException() instanceof org.springframework.web.server.ResponseStatusException))
+                .andExpect(result -> assertTrue(result.getResolvedException().getMessage().contains("Producto no encontrado")));
+    }
+
+    @Test
+    void getProductById_emptyId_returns404() throws Exception {
+        mockMvc.perform(get("/api/products/"))
+                .andExpect(status().is4xxClientError());
     }
 } 

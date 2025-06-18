@@ -11,7 +11,7 @@ const RelatedProducts = ({ products = [] }) => {
   ];
 
   if (displayProducts.length === 0) {
-    return null; // Don't render anything if no products
+    return null; 
   }
 
   return (

@@ -12,7 +12,7 @@
   - **Controller:** Expone endpoints REST.
   - **Service:** Lógica de negocio y orquestación.
   - **Repository:** Acceso a datos (archivo JSON).
-  - **Model:** POJOs para productos y vendedores.
+  - **Model:** POJOs para productos
 
 - **Manejo de Errores:**
   Si un producto no existe, se responde con HTTP 404.
