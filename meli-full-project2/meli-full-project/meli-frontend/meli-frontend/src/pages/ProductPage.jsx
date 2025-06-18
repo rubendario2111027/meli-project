@@ -70,14 +70,18 @@ const ProductPage = () => {
           <div className="lg:col-span-1">
             <BuyCard product={product} />
           </div>
+
+          {/* Secciones Adicionales - ahora dentro del contenedor blanco */}
+          <div className="lg:col-span-3 mt-8 pt-6 border-t border-gray-200 space-y-8">
+            {/* RelatedProducts ya tiene su propio padding py-6/py-8, así que no necesita más aquí */}
+            <RelatedProducts products={relacionados} />
+
+            {/* ProductFeatures, ProductDescription, ProductReviews también tienen su propio py-6/py-8 */}
+            <ProductFeatures />
+            <ProductDescription />
+            <ProductReviews opiniones={opiniones} ratingStats={ratingStats} />
+          </div>
         </div>
-      </div>
-      {/* Secciones adicionales */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <RelatedProducts products={relacionados} />
-        <ProductFeatures />
-        <ProductDescription />
-        <ProductReviews opiniones={opiniones} ratingStats={ratingStats} />
       </div>
       {/* Footer Mercado Libre */}
       <MeliFooter />

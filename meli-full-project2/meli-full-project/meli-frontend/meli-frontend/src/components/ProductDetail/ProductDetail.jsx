@@ -1,150 +1,142 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
+import axios from 'axios';
 
+import MeliHeader from '../MeliHeader'; // Adjusted path
+import MeliFooter from '../MeliFooter'; // Adjusted path
+import ProductGallery from '../ProductGalery/ProductGallery'; // Adjusted path
+import ProductInfo from '../ProductInfo/ProductInfo'; // Adjusted path
+import BuyCard from '../BuyCard/BuyCard'; // Adjusted path
+import RelatedProducts from '../RelatedProducts/RelatedProducts'; // Adjusted path
+import ProductFeatures from '../ProductFeatures/ProductFeatures'; // Adjusted path
+import ProductDescription from '../ProductDescription/ProductDescription'; // Adjusted path
+import ProductReviews from '../ProductReviews/ProductReviews'; // Adjusted path
+
+// Static data previously in ProductPage.jsx, now part of ProductDetail.jsx
 const relacionados = [
-  { id: 'ML456', title: 'PlayStation 5', price: 3900000, image: '/images/ps5.webp' },
-  { id: 'ML789', title: 'Samsung Galaxy S23', price: 3200000, image: '/images/s23.webp' },
-  { id: 'ML101', title: 'Xiaomi Redmi Note 12', price: 1200000, image: '/images/redmi.webp' }
+  { id: 'ML456', title: 'PlayStation 5', price: 3900000, image: '/images/ps5.webp', oldPrice: 4200000, installments: '36x $108.333', freeShipping: true },
+  { id: 'ML789', title: 'Samsung Galaxy S23', price: 3200000, image: '/images/s23.webp', installments: '24x $133.333', freeShipping: true },
+  { id: 'ML101', title: 'Xiaomi Redmi Note 12', price: 1200000, image: '/images/redmi.webp', oldPrice: 1350000, freeShipping: false }
 ];
 
 const opiniones = [
   { user: 'Juan', rating: 5, comment: 'Excelente producto, llegó rápido y es original.' },
   { user: 'Ana', rating: 4, comment: 'Muy buen equipo, la batería dura bastante.' },
   { user: 'Pedro', rating: 5, comment: 'Me encantó, superó mis expectativas.' },
-  { user: 'Laura', rating: 3, comment: 'Está bien, pero esperaba más de la cámara.' }
+  { user: 'Laura', rating: 3, comment: 'Está bien, pero esperaba más de la cámara.' },
+  { user: 'Carlos', rating: 4, comment: 'Buen producto, buena relación calidad-precio.'}
 ];
 
-const getRatingStats = (opiniones) => {
-  const total = opiniones.length;
-  const counts = [0, 0, 0, 0, 0, 0]; // 0 no se usa, 1-5 estrellas
-  opiniones.forEach(op => counts[op.rating]++);
-  return counts.map(c => total ? Math.round((c / total) * 100) : 0);
+// Ensure ratingStats covers 1 to 5 stars; index 0 for 1 star, up to index 4 for 5 stars.
+const getRatingStats = (currentOpiniones) => {
+  const stats = [0, 0, 0, 0, 0]; // Index 0 = 1 star, Index 4 = 5 stars
+  if (currentOpiniones.length === 0) return stats;
+
+  currentOpiniones.forEach(op => {
+    if (op.rating >= 1 && op.rating <= 5) {
+      stats[op.rating - 1]++;
+    }
+  });
+  return stats.map(count => Math.round((count / currentOpiniones.length) * 100));
 };
 
-const ProductDetail = ({ product }) => {
+
+const ProductDetail = () => {
+  const { id } = useParams();
+  const [product, setProduct] = useState(null);
   const [mainImage, setMainImage] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
-    if (product && product.images && product.images.length > 0) {
-      setMainImage(product.images[0]);
-    }
-  }, [product]);
+    setLoading(true);
+    setError(null);
+    axios.get(`http://localhost:8080/api/products/${id}`)
+      .then(response => {
+        setProduct(response.data);
+        setMainImage(response.data.images?.[0]);
+        setLoading(false);
+      })
+      .catch(err => {
+        console.error("Error fetching product data:", err);
+        setError("No se pudo cargar el producto. Intente más tarde.");
+        setLoading(false);
+      });
+  }, [id]);
 
+  // Calculate ratingStats based on the 'opiniones' array
+  // In a real app, 'opiniones' might also be fetched or be part of the 'product' object
   const ratingStats = getRatingStats(opiniones);
 
-  if (!product) return <p>Cargando...</p>;
+  if (loading) {
+    return (
+      <div className="flex justify-center items-center min-h-screen bg-gray-50">
+        <p className="text-xl text-gray-500">Cargando...</p>
+      </div>
+    );
+  }
+
+  if (error) {
+     return (
+      <div className="flex flex-col justify-center items-center min-h-screen bg-gray-50 text-center px-4">
+        <p className="text-xl text-red-500">{error}</p>
+        <a href="/" className="mt-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition-colors">
+          Volver al inicio
+        </a>
+      </div>
+    );
+  }
+
+  if (!product) {
+    // This case might be redundant if error handles non-product scenarios, but good for explicit "not found" if API returns 200 with no data
+    return (
+      <div className="flex justify-center items-center min-h-screen bg-gray-50">
+        <p className="text-xl text-gray-500">Producto no encontrado.</p>
+      </div>
+    );
+  }
 
   return (
     <>
-      <div className="meli-detail-layout">
-        {/* Columna izquierda: galería */}
-        <div className="meli-gallery">
-          <img src={mainImage} alt={product.title} className="meli-main-image" />
-          <div className="meli-thumbnails">
-            {product.images?.map((img, idx) => (
-              <img
-                key={idx}
-                src={img}
-                alt={`thumbnail-${idx}`}
-                className="meli-thumbnail"
-                onClick={() => setMainImage(img)}
-                style={{ border: mainImage === img ? '2px solid #3483fa' : undefined }}
-              />
-            ))}
+      <div className="bg-[#ffe600]">
+        <MeliHeader />
+      </div>
+
+      <div className="flex justify-center bg-gray-50 py-8 min-h-screen">
+        <div className="bg-white rounded-lg shadow-md p-6 grid grid-cols-1 lg:grid-cols-3 gap-6 max-w-7xl mx-auto">
+          {/* Columna 1: Galería de Imágenes */}
+          <div className="lg:col-span-1">
+            <ProductGallery
+              images={product.images}
+              mainImage={mainImage}
+              setMainImage={setMainImage}
+              title={product.title}
+            />
           </div>
-        </div>
-        {/* Columna central: info principal */}
-        <div className="meli-main-info">
-          <div className="meli-title">{product.title}</div>
-          <div className="meli-price">${product.price.toLocaleString('es-CO')}</div>
-          <div className="meli-description">{product.description}</div>
-          <div className="meli-characteristics">
-            <b>Características:</b>
-            <ul>
-              <li>Memoria interna: 128 GB</li>
-              <li>Pantalla: 6.1"</li>
-              <li>Cámara: 12 Mpx</li>
-              <li>Color: Azul</li>
-              <li>Red: 5G</li>
-            </ul>
+
+          {/* Columna 2: Información Principal del Producto */}
+          <div className="lg:col-span-1">
+            <ProductInfo product={product} />
           </div>
-        </div>
-        {/* Columna derecha: compra y vendedor */}
-        <div className="meli-buy-card">
-          <div className="meli-stock">Stock disponible: {product.stock}</div>
-          <button className="meli-buy-btn">Comprar ahora</button>
-          <button className="meli-cart-btn">Agregar al carrito</button>
-          <div className="meli-seller">
-            <b>Vendedor:</b> {product.seller?.name} <br />
-            Reputación: {product.seller?.reputation}
+
+          {/* Columna 3: Tarjeta de Compra */}
+          <div className="lg:col-span-1">
+            <BuyCard product={product} />
           </div>
-          <div className="meli-payment">
-            <b>Métodos de pago:</b>
-            <ul>
-              {product.payment_methods?.map((m, i) => <li key={i}>{m}</li>)}
-            </ul>
-          </div>
-          <div className="meli-garantia">
-            <b>Garantía:</b> 12 meses de fábrica
-          </div>
-          <div className="meli-envio">
-            <b>Envío gratis</b> a todo el país
+
+          {/* Secciones Adicionales (Descripción, Características, Opiniones, Relacionados) */}
+          <div className="lg:col-span-3 mt-8 pt-6 border-t border-gray-200 space-y-8">
+            {/* ProductDescription might need product.description */}
+            <ProductDescription />
+            {/* ProductFeatures might need product.features or similar */}
+            <ProductFeatures />
+            <ProductReviews opiniones={opiniones} ratingStats={ratingStats} />
+            <RelatedProducts products={relacionados} />
           </div>
         </div>
       </div>
-      {/* Productos relacionados */}
-      <div className="meli-relacionados">
-        <h3>Productos relacionados</h3>
-        <div className="meli-relacionados-list">
-          {relacionados.map(prod => (
-            <div key={prod.id} className="meli-relacionado-card">
-              <img src={prod.image} alt={prod.title} />
-              <div>{prod.title}</div>
-              <div>${prod.price.toLocaleString('es-CO')}</div>
-            </div>
-          ))}
-        </div>
-      </div>
-      {/* Características técnicas y descripción extendida */}
-      <div className="meli-caracteristicas">
-        <h3>Características del producto</h3>
-        <ul>
-          <li>Memoria interna: 128 GB</li>
-          <li>Pantalla: 6.1"</li>
-          <li>Cámara: 12 Mpx</li>
-          <li>Color: Azul</li>
-          <li>Red: 5G</li>
-        </ul>
-      </div>
-      <div className="meli-descripcion">
-        <h3>Descripción</h3>
-        <p>
-          El iPhone 14 viene con el sistema de dos cámaras más impresionante en un iPhone 14, para que tomes fotos espectaculares con mucha o poca luz. Y te da más tranquilidad gracias a una funcionalidad de seguridad que salva vidas. Batería para todo el día y hasta 26 horas de reproducción de vídeo. Ceramic Shield y resistencia al agua, características de durabilidad líderes en la industria.
-        </p>
-      </div>
-      {/* Opiniones y barra de progreso al final */}
-      <div className="meli-opiniones">
-        <h3>Opiniones del producto</h3>
-        <div className="meli-rating-bars">
-          {[5,4,3,2,1].map(star => (
-            <div key={star} className="meli-rating-bar-row">
-              <span className="meli-rating-star">{'★'.repeat(star)}</span>
-              <div className="meli-rating-bar">
-                <div className="meli-rating-bar-fill" style={{width: ratingStats[star] + '%'}}></div>
-              </div>
-              <span className="meli-rating-percent">{ratingStats[star]}%</span>
-            </div>
-          ))}
-        </div>
-        <div className="meli-opinion-list">
-          {opiniones.map((op, i) => (
-            <div key={i} className="meli-opinion-item">
-              <span className="meli-opinion-user">{op.user}:</span>
-              <span className="meli-opinion-rating">{'★'.repeat(op.rating)}</span>
-              <span className="meli-opinion-comment">{op.comment}</span>
-            </div>
-          ))}
-        </div>
-      </div>
+
+      <MeliFooter />
     </>
   );
 };

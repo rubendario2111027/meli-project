@@ -21,10 +21,32 @@ const ProductGallery = ({ images, mainImage, setMainImage, title }) => {
     setModalIndex((modalIndex + 1) % images.length);
   };
 
+  // Determine the maximum height for the thumbnail column, matching the main image's max height
+  const mainImageMaxHeight = "420px"; // Corresponds to md:max-h-[420px]
+
   return (
-    <div className="flex flex-col items-center gap-3 font-roboto">
-      {/* Imagen principal */}
-      <div className="flex items-center justify-center bg-white rounded-lg shadow-sm w-full max-w-[420px] h-auto md:min-h-[380px] md:max-h-[420px] border border-gray-200 p-4">
+    // Main container: column layout on small screens, row layout on medium screens and up
+    <div className="flex flex-col md:flex-row items-center md:items-start gap-3 sm:gap-4 font-roboto">
+      {/* Thumbnails container */}
+      {/* Mobile: horizontal scroll below main image. Desktop: vertical scroll left of main image */}
+      <div
+        className="order-2 md:order-1 flex flex-row md:flex-col gap-2 md:space-y-2 md:gap-0 overflow-x-auto md:overflow-y-auto py-2 md:py-0 md:pr-2 w-full md:w-auto"
+        style={{ maxHeight: `calc(${mainImageMaxHeight} - 2rem)` }} // 2rem accounts for potential padding in parent
+      >
+        {images && images.map((img, idx) => (
+          <img
+            key={idx}
+            src={img}
+            alt={`thumbnail-${idx}`}
+            className={`w-12 h-12 md:w-14 md:h-14 object-contain rounded-md border-2 ${mainImage === img ? 'border-blue-500 ring-1 ring-blue-500' : 'border-gray-200 hover:border-gray-300'} bg-white cursor-pointer transition-all flex-shrink-0 md:flex-shrink`}
+            onClick={() => setMainImage(img)}
+          />
+        ))}
+      </div>
+
+      {/* Main image container */}
+      {/* Mobile: full width. Desktop: flexible width to the right of thumbnails */}
+      <div className="order-1 md:order-2 flex-1 flex items-center justify-center bg-white rounded-lg shadow-sm w-full md:w-auto h-auto md:min-h-[380px] md:max-h-[420px] border border-gray-200 p-4">
         <img
           src={mainImage}
           alt={title}
@@ -32,18 +54,7 @@ const ProductGallery = ({ images, mainImage, setMainImage, title }) => {
           onClick={() => images && images.length > 0 && openModal(images.findIndex(img => img === mainImage))}
         />
       </div>
-      {/* Miniaturas horizontales scrollables */}
-      <div className="flex flex-row gap-2 overflow-x-auto py-2 w-full max-w-[420px]">
-        {images && images.map((img, idx) => (
-          <img
-            key={idx}
-            src={img}
-            alt={`thumbnail-${idx}`}
-            className={`w-14 h-14 object-contain rounded-md border-2 ${mainImage === img ? 'border-blue-500 ring-1 ring-blue-500' : 'border-gray-200 hover:border-gray-400'} bg-white cursor-pointer transition-all flex-shrink-0`}
-            onClick={() => setMainImage(img)}
-          />
-        ))}
-      </div>
+
       {/* Modal de imagen */}
       {showModal && images && images.length > 0 && (
         <div className="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50" onClick={() => setShowModal(false)}>
