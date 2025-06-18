@@ -1,0 +1,3 @@
+com/meli/controller/ProductControllerTest.class
+com/meli/service/ProductServiceTest.class
+com/meli/repository/JsonProductRepositoryTest.class

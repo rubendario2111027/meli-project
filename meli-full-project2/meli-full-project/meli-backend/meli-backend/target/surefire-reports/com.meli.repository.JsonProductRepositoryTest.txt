@@ -1,0 +1,57 @@
+-------------------------------------------------------------------------------
+Test set: com.meli.repository.JsonProductRepositoryTest
+-------------------------------------------------------------------------------
+Tests run: 3, Failures: 0, Errors: 3, Skipped: 0, Time elapsed: 0.009 s <<< FAILURE! -- in com.meli.repository.JsonProductRepositoryTest
+com.meli.repository.JsonProductRepositoryTest.findById_existingId_returnsProduct -- Time elapsed: 0.002 s <<< ERROR!
+java.lang.RuntimeException: Error reading products.json
+	at com.meli.repository.JsonProductRepository.findAll(JsonProductRepository.java:21)
+	at com.meli.repository.JsonProductRepository.findById(JsonProductRepository.java:26)
+	at com.meli.repository.JsonProductRepositoryTest.findById_existingId_returnsProduct(JsonProductRepositoryTest.java:20)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:569)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+Caused by: java.io.FileNotFoundException: products.json (No existe el archivo o el directorio)
+	at java.base/java.io.FileInputStream.open0(Native Method)
+	at java.base/java.io.FileInputStream.open(FileInputStream.java:216)
+	at java.base/java.io.FileInputStream.<init>(FileInputStream.java:157)
+	at com.fasterxml.jackson.core.TokenStreamFactory._fileInputStream(TokenStreamFactory.java:278)
+	at com.fasterxml.jackson.core.JsonFactory.createParser(JsonFactory.java:1089)
+	at com.fasterxml.jackson.databind.ObjectMapper.readValue(ObjectMapper.java:3657)
+	at com.meli.repository.JsonProductRepository.findAll(JsonProductRepository.java:19)
+	... 5 more
+
+com.meli.repository.JsonProductRepositoryTest.findById_nonExistingId_returnsEmpty -- Time elapsed: 0.002 s <<< ERROR!
+java.lang.RuntimeException: Error reading products.json
+	at com.meli.repository.JsonProductRepository.findAll(JsonProductRepository.java:21)
+	at com.meli.repository.JsonProductRepository.findById(JsonProductRepository.java:26)
+	at com.meli.repository.JsonProductRepositoryTest.findById_nonExistingId_returnsEmpty(JsonProductRepositoryTest.java:28)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:569)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+Caused by: java.io.FileNotFoundException: products.json (No existe el archivo o el directorio)
+	at java.base/java.io.FileInputStream.open0(Native Method)
+	at java.base/java.io.FileInputStream.open(FileInputStream.java:216)
+	at java.base/java.io.FileInputStream.<init>(FileInputStream.java:157)
+	at com.fasterxml.jackson.core.TokenStreamFactory._fileInputStream(TokenStreamFactory.java:278)
+	at com.fasterxml.jackson.core.JsonFactory.createParser(JsonFactory.java:1089)
+	at com.fasterxml.jackson.databind.ObjectMapper.readValue(ObjectMapper.java:3657)
+	at com.meli.repository.JsonProductRepository.findAll(JsonProductRepository.java:19)
+	... 5 more
+
+com.meli.repository.JsonProductRepositoryTest.findAll_returnsProducts -- Time elapsed: 0.002 s <<< ERROR!
+java.lang.RuntimeException: Error reading products.json
+	at com.meli.repository.JsonProductRepository.findAll(JsonProductRepository.java:21)
+	at com.meli.repository.JsonProductRepositoryTest.findAll_returnsProducts(JsonProductRepositoryTest.java:13)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:569)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+Caused by: java.io.FileNotFoundException: products.json (No existe el archivo o el directorio)
+	at java.base/java.io.FileInputStream.open0(Native Method)
+	at java.base/java.io.FileInputStream.open(FileInputStream.java:216)
+	at java.base/java.io.FileInputStream.<init>(FileInputStream.java:157)
+	at com.fasterxml.jackson.core.TokenStreamFactory._fileInputStream(TokenStreamFactory.java:278)
+	at com.fasterxml.jackson.core.JsonFactory.createParser(JsonFactory.java:1089)
+	at com.fasterxml.jackson.databind.ObjectMapper.readValue(ObjectMapper.java:3657)
+	at com.meli.repository.JsonProductRepository.findAll(JsonProductRepository.java:19)
+	... 4 more
+

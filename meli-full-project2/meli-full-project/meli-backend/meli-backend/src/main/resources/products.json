@@ -1,0 +1,51 @@
+[
+  {
+    "id": "ML123",
+    "title": "iPhone 14 128GB",
+    "description": "iPhone 14 nuevo, 128GB, color medianoche.",
+    "price": 4500000,
+    "images": [
+      "/images/iphone14.webp",
+        "/images/iphone14-1.webp",
+        "/images/iphone14-2.webp",
+        "/images/iphone14-3.webp",
+        "/images/iphone14-4.webp",
+        "/images/iphone14-5.webp",
+        "/images/iphone14-6.webp",
+        "/images/iphone14-7.webp"
+    ],
+    "payment_methods": [
+      "Mercado Pago",
+      "Tarjeta de crédito",
+      "PSE"
+    ],
+    "seller": {
+      "name": "iStore Colombia",
+      "reputation": "platinum"
+    },
+    "stock": 12,
+    "ratings": 4.9,
+    "reviews": 258
+  },
+  {
+    "id": "ML456",
+    "title": "PlayStation 5",
+    "description": "Consola PlayStation 5 con lector de discos, incluye control.",
+    "price": 3900000,
+    "images": [
+      "/images/ps5.jpg"
+    ],
+    "payment_methods": [
+      "Mercado Pago",
+      "Efectivo",
+      "Tarjeta débito"
+    ],
+    "seller": {
+      "name": "TechGames SAS",
+      "reputation": "gold"
+    },
+    "stock": 7,
+    "ratings": 4.7,
+    "reviews": 134
+  }
+]

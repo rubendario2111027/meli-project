@@ -1,0 +1,7 @@
+com/meli/controller/ProductController.class
+com/meli/model/Product$Seller.class
+com/meli/model/Product.class
+com/meli/service/ProductService.class
+com/meli/repository/JsonProductRepository.class
+com/meli/Application.class
+com/meli/repository/JsonProductRepository$1.class

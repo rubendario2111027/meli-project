@@ -1,0 +1,88 @@
+import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
+import ProductGallery from '../components/ProductGalery/ProductGallery';
+import ProductInfo from '../components/ProductInfo/ProductInfo';
+import BuyCard from '../components/BuyCard/BuyCard';
+import RelatedProducts from '../components/RelatedProducts/RelatedProducts';
+import ProductFeatures from '../components/ProductFeatures/ProductFeatures';
+import ProductDescription from '../components/ProductDescription/ProductDescription';
+import ProductReviews from '../components/ProductReviews/ProductReviews';
+import axios from 'axios';
+import MeliHeader from '../components/MeliHeader';
+import MeliFooter from '../components/MeliFooter';
+
+const relacionados = [
+  { id: 'ML456', title: 'PlayStation 5', price: 3900000, image: '/images/ps5.webp' },
+  { id: 'ML789', title: 'Samsung Galaxy S23', price: 3200000, image: '/images/s23.webp' },
+  { id: 'ML101', title: 'Xiaomi Redmi Note 12', price: 1200000, image: '/images/redmi.webp' }
+];
+
+const opiniones = [
+  { user: 'Juan', rating: 5, comment: 'Excelente producto, llegó rápido y es original.' },
+  { user: 'Ana', rating: 4, comment: 'Muy buen equipo, la batería dura bastante.' },
+  { user: 'Pedro', rating: 5, comment: 'Me encantó, superó mis expectativas.' },
+  { user: 'Laura', rating: 3, comment: 'Está bien, pero esperaba más de la cámara.' }
+];
+
+const getRatingStats = (opiniones) => {
+  const total = opiniones.length;
+  const counts = [0, 0, 0, 0, 0, 0];
+  opiniones.forEach(op => counts[op.rating]++);
+  return counts.map(c => total ? Math.round((c / total) * 100) : 0);
+};
+
+const ProductPage = () => {
+  const { id } = useParams();
+  const [product, setProduct] = useState(null);
+  const [mainImage, setMainImage] = useState(null);
+
+  useEffect(() => {
+    axios.get(`http://localhost:8080/api/products/${id}`)
+      .then(response => {
+        setProduct(response.data);
+        setMainImage(response.data.images?.[0]);
+      })
+      .catch(error => console.error(error));
+  }, [id]);
+
+  const ratingStats = getRatingStats(opiniones);
+
+  if (!product) return <p>Cargando...</p>;
+
+  return (
+    <>
+      {/* Header Mercado Libre */}
+      <div className="bg-[#ffe600]">
+        <MeliHeader />
+      </div>
+      {/* Fondo general */}
+      <div className="flex justify-center bg-gray-50 py-10 min-h-screen">
+        <div className="meli-detail-layout bg-white rounded-lg shadow-lg px-8 py-10">
+          {/* Galería de imágenes */}
+          <div className="meli-gallery-vertical">
+            <ProductGallery images={product.images} mainImage={mainImage} setMainImage={setMainImage} title={product.title} />
+          </div>
+          {/* Info del producto */}
+          <div className="meli-main-info">
+            <ProductInfo product={product} />
+          </div>
+          {/* Panel de compra */}
+          <div className="meli-buy-card">
+            <BuyCard product={product} />
+          </div>
+        </div>
+      </div>
+      {/* Secciones adicionales */}
+      <div className="max-w-6xl mx-auto">
+        <RelatedProducts products={relacionados} />
+        <ProductFeatures />
+        <ProductDescription />
+        <ProductReviews opiniones={opiniones} ratingStats={ratingStats} />
+      </div>
+      {/* Footer Mercado Libre */}
+      <MeliFooter />
+    </>
+  );
+};
+
+export default ProductPage;
