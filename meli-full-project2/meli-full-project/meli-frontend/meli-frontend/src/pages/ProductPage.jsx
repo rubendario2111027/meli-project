@@ -57,10 +57,10 @@ const ProductPage = () => {
       </div>
       {/* Fondo general */}
       <div className="flex justify-center bg-gray-50 py-8 min-h-screen">
-        {/* MainGridContainer */}
-        <div className="meli-detail-layout bg-white rounded-lg shadow-md p-6 grid grid-cols-1 lg:grid-cols-3 gap-6 max-w-7xl mx-auto">
-          {/* TopSectionBlock - Wraps the three main columns */}
-          <div className="lg:col-span-3 grid grid-cols-1 lg:grid-cols-3 gap-6">
+        {/* MainGridContainer - Now a simple block/flex container, children will stack vertically */}
+        <div className="meli-detail-layout bg-white rounded-lg shadow-md p-6 max-w-7xl mx-auto"> {/* Removed grid classes */}
+          {/* TopSectionBlock - Wraps the three main columns, takes full width */}
+          <div className="w-full grid grid-cols-1 lg:grid-cols-3 gap-6"> {/* Removed lg:col-span-3, added w-full */}
             {/* Galería de imágenes (GalleryWrapper) */}
             <div className="lg:col-span-1">
               <ProductGallery images={product.images} mainImage={mainImage} setMainImage={setMainImage} title={product.title} />
@@ -75,8 +75,8 @@ const ProductPage = () => {
             </div>
           </div>
 
-          {/* LowerSectionsWrapper - Secciones Adicionales */}
-          <div className="lg:col-span-3 mt-8 pt-6 border-t border-gray-200 space-y-8">
+          {/* LowerSectionsWrapper - Secciones Adicionales, takes full width */}
+          <div className="w-full mt-8 pt-6 border-t border-gray-200 space-y-8"> {/* Removed lg:col-span-3, added w-full */}
             {/* RelatedProducts ya tiene su propio padding py-6/py-8, así que no necesita más aquí */}
             <RelatedProducts products={relacionados} />
 

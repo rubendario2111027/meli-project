@@ -75,7 +75,7 @@ const BuyCard = ({ product }) => {
       )}
 
       {/* Info Sections */}
-      <div className="space-y-3 pt-2 text-sm">
+      <div className="space-y-3 pt-2 text-xs sm:text-sm">
         <div className="flex items-start space-x-2 text-gray-600">
           <IconReturn />
           <p>
@@ -95,7 +95,7 @@ const BuyCard = ({ product }) => {
       </div>
 
       {/* Payment Methods Link */}
-      <div className="text-sm text-gray-600">
+      <div className="text-xs sm:text-sm text-gray-600">
         <a href="#" className="text-blue-500 hover:text-blue-600">Ver medios de pago</a>
       </div>
     </div>

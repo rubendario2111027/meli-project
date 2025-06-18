@@ -51,7 +51,7 @@ const ProductInfo = ({ product }) => {
       </div>
 
       {/* Title */}
-      <h1 className="text-2xl font-semibold text-gray-900">
+      <h1 className="text-xl sm:text-2xl font-semibold text-gray-900">
         {productData.title}
       </h1>
 
@@ -69,12 +69,12 @@ const ProductInfo = ({ product }) => {
           <div className="text-sm text-gray-500 line-through">{productData.oldPrice}</div>
         )}
         <div className="flex items-baseline space-x-2">
-          <span className="text-3xl font-medium text-gray-900">{productData.currentPrice}</span>
+          <span className="text-2xl sm:text-3xl font-medium text-gray-900">{productData.currentPrice}</span>
           {productData.discount && (
-            <span className="text-lg text-green-500 font-semibold">{productData.discount}</span>
+            <span className="text-base sm:text-lg text-green-500 font-semibold">{productData.discount}</span>
           )}
         </div>
-        <div className="text-base text-gray-700 mt-1">
+        <div className="text-sm sm:text-base text-gray-700 mt-1">
           {productData.installments} <span className="text-green-500">{productData.interestInfo}</span>
         </div>
         <div className="text-sm text-blue-500 hover:text-blue-600 cursor-pointer mt-1">{productData.promoLink1}</div>
@@ -85,7 +85,7 @@ const ProductInfo = ({ product }) => {
       <div className="space-y-3 pt-2">
         <div>
           <div className="text-sm font-medium text-gray-700 mb-1">Color: <span className="font-normal">{productData.selectedColor}</span></div>
-          <div className="flex space-x-2">
+          <div className="flex flex-wrap gap-2"> {/* Added flex-wrap and gap-2 instead of space-x-2 for better wrapping */}
             {productData.colors.map(color => (
               <button key={color.name} title={color.name} className={`w-10 h-10 rounded-full border-2 ${productData.selectedColor === color.name ? 'border-blue-500 ring-1 ring-blue-500' : 'border-gray-300'} focus:outline-none`}>
                 <img src={color.img} alt={color.name} className="w-full h-full object-cover rounded-full" />
@@ -97,7 +97,7 @@ const ProductInfo = ({ product }) => {
         {/* Product Options (e.g., Memory) */}
         <div>
           <div className="text-sm font-medium text-gray-700 mb-1">Memoria RAM: <span className="font-normal">{productData.selectedMemory}</span></div>
-          <div className="flex space-x-2">
+          <div className="flex flex-wrap gap-2"> {/* Added flex-wrap and gap-2 */}
             {productData.memoryOptions.map(mem => (
               <button
                 key={mem}
@@ -112,7 +112,7 @@ const ProductInfo = ({ product }) => {
 
       {/* Main Features */}
       <div className="pt-4">
-        <h2 className="text-xl font-semibold text-gray-800 mb-3">Características principales</h2>
+        <h2 className="text-lg sm:text-xl font-semibold text-gray-800 mb-3">Características principales</h2>
         <div className="space-y-2">
           {productData.mainFeatures.map((feature, index) => (
             <div key={index} className="flex items-start space-x-3 text-sm text-gray-700">
