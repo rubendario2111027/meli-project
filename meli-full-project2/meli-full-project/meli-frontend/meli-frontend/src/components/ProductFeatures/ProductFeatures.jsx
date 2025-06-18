@@ -1,101 +1,101 @@
 import React from 'react';
 
-const features = [
+const featuresData = [
   {
     icon: (
-      <span className="inline-flex items-center justify-center w-8 h-8 rounded-full bg-[#f5f5f5] text-[#333] mr-3">
-        <svg width="20" height="20" fill="none" viewBox="0 0 24 24"><path fill="#333" d="M17 2H7a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2Zm0 18H7V4h10v16Z"/></svg>
-      </span>
+      // Using a generic screen icon for simplicity, replace with actual SVG if available
+      <svg className="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
     ),
     label: 'Tamaño de la pantalla',
-    value: '6.1 "',
+    value: '6.1"', // Keep the double quote for inches
     sub: '(14.67 cm x 7.15 cm x 7.8 mm)',
-    bar: true
+    bar: true,
+    barValue: '40%' // Example value for the bar
   },
   {
     icon: (
-      <span className="inline-flex items-center justify-center w-8 h-8 rounded-full bg-[#f5f5f5] text-[#333] mr-3">
-        <svg width="20" height="20" fill="none" viewBox="0 0 24 24"><path fill="#333" d="M17 6V4a2 2 0 0 0-2-2H9a2 2 0 0 0-2 2v2H3v2h18V6h-4Zm-8 0V4h8v2H9Zm10 4H5v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V10Zm-2 8H7v-2h10v2Zm0-4H7v-2h10v2Z"/></svg>
-      </span>
+      <svg className="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 16gbh16M4 12h16M4 8h16M4 4h16"></path></svg> // Generic data/memory icon
     ),
     label: 'Memoria interna',
     value: '128 GB'
   },
   {
     icon: (
-      <span className="inline-flex items-center justify-center w-8 h-8 rounded-full bg-[#f5f5f5] text-[#333] mr-3">
-        <svg width="20" height="20" fill="none" viewBox="0 0 24 24"><path fill="#333" d="M12 7a5 5 0 1 0 0 10 5 5 0 0 0 0-10Zm0 8a3 3 0 1 1 0-6 3 3 0 0 1 0 6Zm7-8h-2.586l-1.707-1.707A1 1 0 0 0 14.586 4H9.414a1 1 0 0 0-.707.293L7 5.586H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h16a1 1 0 0 0 1-1V6a1 1 0 0 0-1-1Zm-7 10a7 7 0 1 1 0-14 7 7 0 0 1 0 14Z"/></svg>
-      </span>
+      <svg className="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"></path><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
     ),
     label: 'Cámara trasera principal',
     value: '12 Mpx'
   },
   {
     icon: (
-      <span className="inline-flex items-center justify-center w-8 h-8 rounded-full bg-[#f5f5f5] text-[#333] mr-3">
-        <svg width="20" height="20" fill="none" viewBox="0 0 24 24"><path fill="#333" d="M12 7a5 5 0 1 0 0 10 5 5 0 0 0 0-10Zm0 8a3 3 0 1 1 0-6 3 3 0 0 1 0 6Zm7-8h-2.586l-1.707-1.707A1 1 0 0 0 14.586 4H9.414a1 1 0 0 0-.707.293L7 5.586H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h16a1 1 0 0 0 1-1V6a1 1 0 0 0-1-1Zm-7 10a7 7 0 1 1 0-14 7 7 0 0 1 0 14Z"/></svg>
-      </span>
+      <svg className="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"></path><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
     ),
     label: 'Cámara frontal principal',
     value: '12 Mpx'
   },
   {
     icon: (
-      <span className="inline-flex items-center justify-center w-8 h-8 rounded-full bg-[#f5f5f5] text-[#333] mr-3">
-        <svg width="20" height="20" fill="none" viewBox="0 0 24 24"><path fill="#333" d="M17 7a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V8a1 1 0 0 1 1-1h10Zm0-2H7a3 3 0 0 0-3 3v8a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V8a3 3 0 0 0-3-3Zm-5 7a2 2 0 1 1 0-4 2 2 0 0 1 0 4Z"/></svg>
-      </span>
+      <svg className="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg> // Generic NFC/Connectivity icon
     ),
     label: 'Con NFC',
     value: 'Sí'
   },
   {
     icon: (
-      <span className="inline-flex items-center justify-center w-8 h-8 rounded-full bg-[#f5f5f5] text-[#333] mr-3">
-        <svg width="20" height="20" fill="none" viewBox="0 0 24 24"><path fill="#333" d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20Zm0 18a8 8 0 1 1 0-16 8 8 0 0 1 0 16Zm-1-7h2v2h-2v-2Zm0-6h2v4h-2V7Z"/></svg>
-      </span>
+      <svg className="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg> // Generic unlock icon
     ),
     label: 'Desbloqueo',
     value: 'Reconocimiento facial'
   }
 ];
 
+
 const ProductFeatures = () => (
-  <div className="meli-caracteristicas">
-    <h3 className="text-[1.5rem] font-bold text-[#333] mb-2 font-roboto">Características del producto</h3>
-    <hr className="border-t border-[#ededed] mb-6" />
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-6">
-      {/* Pantalla con barra */}
-      <div className="flex items-start gap-3 col-span-2">
-        {features[0].icon}
-        <div className="flex-1">
-          <div className="text-base text-[#333] font-medium">
-            Tamaño de la pantalla: <b>6.1 "</b>
-          </div>
-          <div className="text-sm text-[#888]">(14.67 cm x 7.15 cm x 7.8 mm)</div>
-          <div className="flex items-center gap-2 mt-1">
-            <span className="text-xs text-[#888]">PEQUEÑO</span>
-            <div className="flex-1 h-2 rounded bg-gray-200 mx-2 relative" style={{maxWidth: 180}}>
-              <div className="absolute left-0 top-0 h-2 rounded bg-blue-500" style={{width: '40%'}}></div>
-            </div>
-            <span className="text-xs text-[#888]">GRANDE</span>
-          </div>
-        </div>
-      </div>
-      {/* Resto de características */}
-      {features.slice(1).map((f, i) => (
-        <div className="flex items-center gap-3" key={i}>
-          {f.icon}
-          <div>
-            <div className="text-base text-[#333] font-medium">{f.label}: <b>{f.value}</b></div>
+  <div className="font-roboto py-6 md:py-8">
+    <h3 className="text-xl font-semibold text-gray-800 mb-5">Características del producto</h3>
+
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-4">
+      {featuresData.map((feature, index) => (
+        <div
+          key={index}
+          className={`flex items-start py-2 ${feature.bar ? 'md:col-span-2' : 'md:col-span-1'}`} // Tamaño de pantalla spans 2 cols on md+
+        >
+          <span className="flex-shrink-0 w-7 h-7 flex items-center justify-center mr-3">
+            {feature.icon}
+          </span>
+          <div className="flex-1">
+            <span className="text-sm text-gray-700">{feature.label}: </span>
+            <span className="text-sm text-gray-900 font-medium">{feature.value}</span>
+            {feature.sub && (
+              <div className="text-xs text-gray-500 mt-0.5">{feature.sub}</div>
+            )}
+            {feature.bar && (
+              <div className="flex items-center gap-2 mt-1.5">
+                <span className="text-xs text-gray-500 uppercase">Pequeño</span>
+                <div className="flex-1 h-1.5 rounded-full bg-gray-200 relative max-w-[200px]">
+                  <div
+                    className="absolute left-0 top-0 h-1.5 rounded-full bg-gray-600"
+                    style={{ width: feature.barValue || '0%' }}
+                  ></div>
+                </div>
+                <span className="text-xs text-gray-500 uppercase">Grande</span>
+              </div>
+            )}
           </div>
         </div>
       ))}
     </div>
-    <a href="#" className="block mt-6 text-[#3483fa] text-sm font-medium hover:underline flex items-center gap-1">
-      Ver todas las características
-      <svg width="16" height="16" fill="none" viewBox="0 0 24 24"><path fill="#3483fa" d="M10 17l5-5-5-5v10z"/></svg>
-    </a>
+
+    <div className="mt-6 text-right"> {/* Aligns link to the right */}
+      <a
+        href="#"
+        className="inline-flex items-center text-sm font-medium text-blue-500 hover:text-blue-600 hover:underline"
+      >
+        Ver todas las características
+        <svg className="w-4 h-4 ml-1" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clipRule="evenodd"></path></svg>
+      </a>
+    </div>
   </div>
 );
 
-export default ProductFeatures; 
+export default ProductFeatures;
