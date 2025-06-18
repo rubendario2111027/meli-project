@@ -1,0 +1,39 @@
+# Git specific
+.git
+.gitignore
+
+# IDE specific
+.idea/
+*.iml
+*.project
+*.classpath
+.settings/
+
+# Build output directories
+target/
+build/
+dist/
+
+# Log files
+*.log
+logs/
+
+# Maven wrapper (if not intended to be part of the image, though sometimes included)
+mvnw
+mvnw.cmd
+.mvn/
+
+# Local user-specific files
+.DS_Store
+Thumbs.db
+
+# Archives
+*.jar
+*.war
+*.zip
+*.tar.gz
+*.rar
+
+# Test reports
+**/surefire-reports/
+**/failsafe-reports/

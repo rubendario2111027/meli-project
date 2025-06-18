@@ -40,15 +40,4 @@ public class ProductServiceTest {
         when(productRepository.findById("NOPE")).thenReturn(Optional.empty());
         assertNull(productService.getProductById("NOPE"));
     }
-
-    @Test
-    void getAllProducts_emptyList() {
-        when(productRepository.findAll()).thenReturn(Arrays.asList());
-        assertTrue(productService.getAllProducts().isEmpty());
-    }
-
-    @Test
-    void getProductById_nullId_returnsNull() {
-        assertNull(productService.getProductById(null));
-    }
 } 

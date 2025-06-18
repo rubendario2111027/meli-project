@@ -10,7 +10,6 @@ import ProductReviews from '../components/ProductReviews/ProductReviews';
 import axios from 'axios';
 import MeliHeader from '../components/MeliHeader';
 import MeliFooter from '../components/MeliFooter';
-import Breadcrumbs from '../components/Breadcrumbs';
 
 const relacionados = [
   { id: 'ML456', title: 'PlayStation 5', price: 3900000, image: '/images/ps5.webp' },
@@ -48,43 +47,43 @@ const ProductPage = () => {
 
   const ratingStats = getRatingStats(opiniones);
 
-  if (!product) return <p>Not Found</p>;
+  if (!product) return <p>Cargando...</p>;
 
   return (
     <>
-      {/* Header fuera del card blanco y del grid */}
+      {/* Header Mercado Libre */}
       <div className="bg-[#ffe600]">
         <MeliHeader />
       </div>
+      {/* Fondo general */}
       <div className="flex justify-center bg-gray-50 py-8 min-h-screen">
-        <div className="w-full max-w-4xl mx-auto">
-          <Breadcrumbs
-            items={[
-              { label: 'Celulares y Teléfonos', href: '/celulares-y-telefonos' },
-              { label: 'Celulares y Smartphones', href: '/celulares-y-telefonos/smartphones' },
-              { label: 'Apple iPhone' }
-            ]}
-          />
-          <div className="bg-white rounded-lg shadow-md p-6">
-            {/* Grid de 3 columnas */}
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-              <div>
-                <ProductGallery images={product.images} mainImage={mainImage} setMainImage={setMainImage} title={product.title} />
-              </div>
-              <div>
-                <ProductInfo product={product} />
-              </div>
-              <div className="w-full max-w-xs">
-                <BuyCard product={product} />
-              </div>
+        {/* MainGridContainer - Now a simple block/flex container, children will stack vertically */}
+        <div className="meli-detail-layout bg-white rounded-lg shadow-md p-6 max-w-7xl mx-auto"> {/* Removed grid classes */}
+          {/* TopSectionBlock - Wraps the three main columns, takes full width */}
+          <div className="w-full grid grid-cols-1 lg:grid-cols-3 gap-6"> {/* Removed lg:col-span-3, added w-full */}
+            {/* Galería de imágenes (GalleryWrapper) */}
+            <div className="lg:col-span-1">
+              <ProductGallery images={product.images} mainImage={mainImage} setMainImage={setMainImage} title={product.title} />
             </div>
-            {/* Secciones inferiores */}
-            <div className="w-full mt-8 pt-6 border-t border-gray-200 space-y-8">
-              <RelatedProducts products={relacionados} />
-              <ProductDescription description={product.description} />
-              <ProductFeatures />
-              <ProductReviews opiniones={opiniones} ratingStats={ratingStats} />
+            {/* Info del producto (InfoWrapper) */}
+            <div className="lg:col-span-1"> {/* Adjust based on actual ProductInfo width needs, might be lg:col-span-2 with BuyBox if gallery is narrow */}
+              <ProductInfo product={product} />
             </div>
+            {/* Panel de compra (BuyCardWrapper) */}
+            <div className="lg:col-span-1">
+              <BuyCard product={product} />
+            </div>
+          </div>
+
+          {/* LowerSectionsWrapper - Secciones Adicionales, takes full width */}
+          <div className="w-full mt-8 pt-6 border-t border-gray-200 space-y-8"> {/* Removed lg:col-span-3, added w-full */}
+            {/* RelatedProducts ya tiene su propio padding py-6/py-8, así que no necesita más aquí */}
+            <RelatedProducts products={relacionados} />
+
+            {/* ProductFeatures, ProductDescription, ProductReviews también tienen su propio py-6/py-8 */}
+            <ProductFeatures />
+            <ProductDescription />
+            <ProductReviews opiniones={opiniones} ratingStats={ratingStats} />
           </div>
         </div>
       </div>
