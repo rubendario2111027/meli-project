@@ -56,24 +56,24 @@ const ProductPage = () => {
         <MeliHeader />
       </div>
       {/* Fondo general */}
-      <div className="flex justify-center bg-gray-50 py-10 min-h-screen">
-        <div className="meli-detail-layout bg-white rounded-lg shadow-lg px-8 py-10">
+      <div className="flex justify-center bg-gray-50 py-8 min-h-screen">
+        <div className="meli-detail-layout bg-white rounded-lg shadow-md p-6 grid grid-cols-1 lg:grid-cols-3 gap-6 max-w-7xl mx-auto">
           {/* Galería de imágenes */}
-          <div className="meli-gallery-vertical">
+          <div className="lg:col-span-1">
             <ProductGallery images={product.images} mainImage={mainImage} setMainImage={setMainImage} title={product.title} />
           </div>
           {/* Info del producto */}
-          <div className="meli-main-info">
+          <div className="lg:col-span-1"> {/* Adjust based on actual ProductInfo width needs, might be lg:col-span-2 with BuyBox if gallery is narrow */}
             <ProductInfo product={product} />
           </div>
           {/* Panel de compra */}
-          <div className="meli-buy-card">
+          <div className="lg:col-span-1">
             <BuyCard product={product} />
           </div>
         </div>
       </div>
       {/* Secciones adicionales */}
-      <div className="max-w-6xl mx-auto">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <RelatedProducts products={relacionados} />
         <ProductFeatures />
         <ProductDescription />
