@@ -103,28 +103,32 @@ const ProductDetail = () => {
       </div>
 
       <div className="flex justify-center bg-gray-50 py-8 min-h-screen">
+        {/* MainGridContainer */}
         <div className="bg-white rounded-lg shadow-md p-6 grid grid-cols-1 lg:grid-cols-3 gap-6 max-w-7xl mx-auto">
-          {/* Columna 1: Galería de Imágenes */}
-          <div className="lg:col-span-1">
-            <ProductGallery
-              images={product.images}
-              mainImage={mainImage}
-              setMainImage={setMainImage}
-              title={product.title}
-            />
+          {/* TopSectionBlock - Wraps the three main columns */}
+          <div className="lg:col-span-3 grid grid-cols-1 lg:grid-cols-3 gap-6">
+            {/* Columna 1: Galería de Imágenes (GalleryWrapper) */}
+            <div className="lg:col-span-1">
+              <ProductGallery
+                images={product.images}
+                mainImage={mainImage}
+                setMainImage={setMainImage}
+                title={product.title}
+              />
+            </div>
+
+            {/* Columna 2: Información Principal del Producto (InfoWrapper) */}
+            <div className="lg:col-span-1">
+              <ProductInfo product={product} />
+            </div>
+
+            {/* Columna 3: Tarjeta de Compra (BuyCardWrapper) */}
+            <div className="lg:col-span-1">
+              <BuyCard product={product} />
+            </div>
           </div>
 
-          {/* Columna 2: Información Principal del Producto */}
-          <div className="lg:col-span-1">
-            <ProductInfo product={product} />
-          </div>
-
-          {/* Columna 3: Tarjeta de Compra */}
-          <div className="lg:col-span-1">
-            <BuyCard product={product} />
-          </div>
-
-          {/* Secciones Adicionales (Descripción, Características, Opiniones, Relacionados) */}
+          {/* LowerSectionsWrapper - Secciones Adicionales */}
           <div className="lg:col-span-3 mt-8 pt-6 border-t border-gray-200 space-y-8">
             {/* ProductDescription might need product.description */}
             <ProductDescription />

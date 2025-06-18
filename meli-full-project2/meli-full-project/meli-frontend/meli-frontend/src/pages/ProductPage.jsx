@@ -57,21 +57,25 @@ const ProductPage = () => {
       </div>
       {/* Fondo general */}
       <div className="flex justify-center bg-gray-50 py-8 min-h-screen">
+        {/* MainGridContainer */}
         <div className="meli-detail-layout bg-white rounded-lg shadow-md p-6 grid grid-cols-1 lg:grid-cols-3 gap-6 max-w-7xl mx-auto">
-          {/* Galería de imágenes */}
-          <div className="lg:col-span-1">
-            <ProductGallery images={product.images} mainImage={mainImage} setMainImage={setMainImage} title={product.title} />
-          </div>
-          {/* Info del producto */}
-          <div className="lg:col-span-1"> {/* Adjust based on actual ProductInfo width needs, might be lg:col-span-2 with BuyBox if gallery is narrow */}
-            <ProductInfo product={product} />
-          </div>
-          {/* Panel de compra */}
-          <div className="lg:col-span-1">
-            <BuyCard product={product} />
+          {/* TopSectionBlock - Wraps the three main columns */}
+          <div className="lg:col-span-3 grid grid-cols-1 lg:grid-cols-3 gap-6">
+            {/* Galería de imágenes (GalleryWrapper) */}
+            <div className="lg:col-span-1">
+              <ProductGallery images={product.images} mainImage={mainImage} setMainImage={setMainImage} title={product.title} />
+            </div>
+            {/* Info del producto (InfoWrapper) */}
+            <div className="lg:col-span-1"> {/* Adjust based on actual ProductInfo width needs, might be lg:col-span-2 with BuyBox if gallery is narrow */}
+              <ProductInfo product={product} />
+            </div>
+            {/* Panel de compra (BuyCardWrapper) */}
+            <div className="lg:col-span-1">
+              <BuyCard product={product} />
+            </div>
           </div>
 
-          {/* Secciones Adicionales - ahora dentro del contenedor blanco */}
+          {/* LowerSectionsWrapper - Secciones Adicionales */}
           <div className="lg:col-span-3 mt-8 pt-6 border-t border-gray-200 space-y-8">
             {/* RelatedProducts ya tiene su propio padding py-6/py-8, así que no necesita más aquí */}
             <RelatedProducts products={relacionados} />
